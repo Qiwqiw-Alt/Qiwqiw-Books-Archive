@@ -1,4 +1,4 @@
-import { db } from "../../main-js/firebase-config.js"
+import { db } from "../../main/js/firebase-config.js"
 import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const favoriteContainer = document.getElementById('favorite-list');

@@ -1,4 +1,4 @@
-import { db } from "../../main-js/firebase-config"
+import { db } from "../../main/js/firebase-config"
 import { ref, get, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const urlParams = new URLSearchParams(window.location.search);
