@@ -1,4 +1,4 @@
-import { db } from "../../main/js/firebase-config.js";
+import { db } from "../../assets/js/firebase-config";
 import { ref, push, set, remove, get, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 
@@ -70,7 +70,7 @@ coverInput.addEventListener('change', function(event) {
     }
 });
 
-// Create adn Edit
+// Create and Edit
 form.addEventListener('submit', function(event) {
     event.preventDefault();
 
