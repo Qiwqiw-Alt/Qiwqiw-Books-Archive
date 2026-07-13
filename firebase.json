@@ -8,7 +8,11 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "cleanUrls": true,
+    "rewrites": [],
+    "headers": [],
+    "trailingSlash": false
   },
   "emulators": {
     "auth": {

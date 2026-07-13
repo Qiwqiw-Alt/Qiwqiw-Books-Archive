@@ -1,4 +1,4 @@
-import { db } from "../../assets/js/firebase-config";
+import { db } from "../../assets/js/firebase-config.js";
 import { ref, push, set, remove, get, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 

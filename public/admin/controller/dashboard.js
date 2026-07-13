@@ -1,4 +1,4 @@
-import { db } from "../../assets/js/firebase-config";
+import { db } from "../../assets/js/firebase-config.js";
 import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { deleteBook } from "./books.js"
 import { deleteProject } from "./projects.js";
@@ -32,7 +32,7 @@ onValue(booksRef, (snapshot) => {
                         </div>
 
                         <div class="d-flex gap-2">
-                            <a href="edit.html?id=${id}" class="btn btn-warning btn-sm fw-bold text-dark">
+                            <a href="form-book-402-qoqo.html?id=${id}" class="btn btn-warning btn-sm fw-bold text-dark">
                                  Edit
                             </a>
                             <button class="btn btn-danger btn-sm delete-btn" data-id="${id}" data-title="${book.title}">
@@ -78,7 +78,7 @@ onValue(projectRef, (snapshot) => {
                         </div>
                     </div>
                     <div class="d-flex gap-2">
-                        <a href="form-projects.html?id=${id}" class="btn btn-warning btn-sm fw-bold text-dark">Edit</a>
+                        <a href="form-projects-401-qoqo.html?id=${id}" class="btn btn-warning btn-sm fw-bold text-dark">Edit</a>
                         <button class="btn btn-danger btn-sm delete-project-btn" data-id="${id}" data-title="${project.title}">Hapus</button>
                     </div>
                 </div>

@@ -18,15 +18,12 @@ function loadProjectDetail(id) {
         if (snapshot.exists()) {
             const project = snapshot.val();
 
-            // Ubah Title Browser & Elemen Teks Utama
             document.title = `Projek: ${project.title}`;
             document.getElementById('project-title').innerText = project.title;
             document.getElementById('project-tag').innerText = project.category || "Website";
 
-            // Siapkan element content generator
             const container = document.getElementById('project-details-content');
-            container.innerHTML = ""; // Bersihkan dummy text
-
+            container.innerHTML = ""; 
             const sections = [
                 { label: "CHALLENGES", data: project.challenges },
                 { label: "KEY DECISIONS", data: project.decisions },

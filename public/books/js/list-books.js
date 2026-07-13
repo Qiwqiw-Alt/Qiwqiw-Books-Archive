@@ -1,4 +1,4 @@
-import { db } from "../../assets/js/firebase-config";
+import { db } from "../../assets/js/firebase-config.js";
 import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const bookContainer = document.getElementById('book-list');
@@ -14,11 +14,10 @@ onValue(booksRef, (snapshot) => {
 
         Object.keys(booksData).forEach((id) => {
             const book = booksData[id];
-            let htmlContent = "";
 
             const shortDesc = book.desc.length > 90 ? book.desc.substring(0, 90) + "..." : book.desc;
         
-            htmlContent += `
+            const htmlContent = `
                     <div class="col">
                         <div class="card h-100 flat-card">
                             <img src="${book.cover}" class="card-img-top flat-cover-img" alt="${book.title}">
@@ -29,7 +28,7 @@ onValue(booksRef, (snapshot) => {
                                     <p class="card-text small text-secondary">${shortDesc}</p>
                                 </div>
                                 <div class="mt-3">
-                                    <a href="detailpage.html?book=${id}" class="btn-flat w-100 text-center">
+                                    <a href="detail-book.html?book=${id}" class="btn-flat w-100 text-center">
                                         Baca Selengkapnya &raquo;
                                     </a>[cite: 5]
                                 </div>
@@ -37,7 +36,7 @@ onValue(booksRef, (snapshot) => {
                         </div>
                     </div>
                 `;
-            bookContainer.innerHTML = htmlContent;
+            bookContainer.insertAdjacentHTML('beforeend', htmlContent);
     });
     } else {
         bookContainer.innerHTML = `
