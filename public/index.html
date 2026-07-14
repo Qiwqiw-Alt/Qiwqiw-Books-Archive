@@ -5,123 +5,370 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qoqo | Portfolio & Book Archive</title>
     
+    <!-- Google Fonts: Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Custom Style Flat Monokrom -->
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Neo-Brutalist / Flat Monochrome Custom Styles -->
     <style>
-        body { 
-            background-color: #ffffff; 
-            color: #212529; 
-            font-family: system-ui, -apple-system, sans-serif;
-            scroll-behavior: smooth; /* Efek scrolling halus saat klik menu navbar */
-            transition: background 0.3s, color 0.3s;
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #191A23;
+            --border-color: #191A23;
+            --accent-color: #2563EB;
+            --accent-text: #ffffff;
+            
+            /* Card Theme A: Light in Light mode, Dark in Dark mode */
+            --card-bg-type-a: #ffffff;
+            --card-text-type-a: #191A23;
+            
+            /* Card Theme B: Dark in Light mode, Light in Dark mode */
+            --card-bg-type-b: #191A23;
+            --card-text-type-b: #ffffff;
+            
+            --neutral-light: #F3F3F3;
+            --neutral-dark: #292A32;
+            --shadow-color: #191A23;
+            --banner-bg: #F3F3F3;
+            --text-muted: #606060;
+            --badge-outline: #191A23;
+            
+            /* Arrow circle colors */
+            --arrow-bg-a: #191A23;
+            --arrow-color-a: #ffffff;
+            --arrow-bg-b: #ffffff;
+            --arrow-color-b: #191A23;
         }
 
-        /* Tema Dark Mode Monokrom */
         body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-        body.dark-mode .navbar, body.dark-mode .flat-card, body.dark-mode .flat-modal-content {
-            background-color: #1e1e1e;
-            border-color: #333333 !important;
-        }
-        body.dark-mode .btn-flat-outline {
-            color: #ffffff;
-            border-color: #444444;
-        }
-        body.dark-mode .btn-flat-outline:hover {
-            background-color: #333333;
-        }
-        body.dark-mode .text-muted-custom {
-            color: #a0a0a0;
-        }
-
-        /* Navbar Style ala Asril (Flat Version) */
-        .navbar-flat {
-            border-bottom: 1px solid #212529;
-            background-color: #ffffff;
-        }
-        .nav-link-flat {
-            color: #212529;
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-            padding: 0.5rem 1rem !important;
-            transition: color 0.2s;
-        }
-        .nav-link-flat:hover {
-            color: #6c757d;
-        }
-        body.dark-mode .nav-link-flat {
-            color: #e0e0e0;
-        }
-        body.dark-mode .nav-link-flat:hover {
-            color: #888888;
+            --bg-color: #191A23;
+            --text-color: #ffffff;
+            --border-color: #ffffff;
+            --accent-color: #2563EB;
+            --accent-text: #ffffff;
+            
+            /* Card Theme A: Swaps to Dark in Dark mode */
+            --card-bg-type-a: #191A23;
+            --card-text-type-a: #ffffff;
+            
+            /* Card Theme B: Swaps to Light in Dark mode */
+            --card-bg-type-b: #ffffff;
+            --card-text-type-b: #191A23;
+            
+            --neutral-light: #292A32;
+            --neutral-dark: #ffffff;
+            --shadow-color: #000000;
+            --banner-bg: #292A32;
+            --text-muted: #c0c0c0;
+            --badge-outline: #ffffff;
+            
+            /* Arrow circle colors swap */
+            --arrow-bg-a: #ffffff;
+            --arrow-color-a: #191A23;
+            --arrow-bg-b: #191A23;
+            --arrow-color-b: #ffffff;
         }
 
-        /* Komponen Umum Flat */
-        .flat-card {
-            background-color: #ffffff;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            box-shadow: none !important;
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+            overflow-x: hidden;
         }
-        .btn-flat {
-            background-color: #212529;
-            color: #ffffff !important;
-            text-decoration: none;
-            display: inline-block;
-            border: 1px solid #212529;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-        .btn-flat:hover {
-            background-color: #495057;
-            border-color: #495057;
-        }
-        .btn-flat-outline {
-            background-color: transparent;
-            color: #212529;
-            text-decoration: none;
-            display: inline-block;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-        .btn-flat-outline:hover {
-            background-color: #f8f9fa;
-            border-color: #212529;
-        }
-        .text-muted-custom {
-            color: #6c757d;
-        }
-        
-        /* Modal Customization */
-        .modal-backdrop { background-color: rgba(0, 0, 0, 0.4) !important; }
-        .flat-modal-content { background-color: #ffffff; border: 1px solid #212529 !important; border-radius: 0px !important; box-shadow: none !important; }
-        .btn-close-flat { background: #ffffff; color: #212529; border: 1px solid #212529; font-weight: bold; padding: 5px 10px; font-family: monospace; cursor: pointer; }
-        .btn-close-flat:hover { background: #212529; color: #ffffff; }
 
-        /* Jarak Section */
+        /* Spacing */
         section {
             padding: 80px 0;
-            border-bottom: 1px solid #f0f0f0;
         }
-        body.dark-mode section {
-            border-bottom: 1px solid #222222;
+
+        /* Navbar Styling */
+        .navbar-flat {
+            background-color: var(--bg-color);
+            border-bottom: 2px solid var(--border-color);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .nav-link-flat {
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.2s, transform 0.2s;
+        }
+        .nav-link-flat:hover {
+            color: var(--accent-color);
+            transform: translateY(-1px);
+        }
+
+        /* Badges */
+        .badge-brutal-accent {
+            background-color: var(--accent-color);
+            color: var(--accent-text) !important;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 0.4rem 0.9rem;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 1.6rem;
+            border: 2px solid var(--border-color);
+        }
+        
+        .badge-title-a {
+            background-color: var(--accent-color);
+            color: var(--accent-text);
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 7px;
+            padding: 0.2rem 0.6rem;
+            display: inline-block;
+            border: 2px solid var(--border-color);
+        }
+        .badge-title-b {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 7px;
+            padding: 0.2rem 0.6rem;
+            display: inline-block;
+            border: 2px solid var(--border-color);
+        }
+        .badge-brutal-normal {
+            background-color: var(--neutral-light);
+            color: var(--text-color);
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        /* Buttons */
+        .btn-brutal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s;
+            cursor: pointer;
+        }
+        .btn-brutal-primary {
+            background-color: var(--text-color);
+            color: var(--bg-color) !important;
+            box-shadow: 4px 4px 0px var(--shadow-color);
+        }
+        .btn-brutal-primary:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--shadow-color);
+            background-color: var(--text-color);
+        }
+        .btn-brutal-primary:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--shadow-color);
+        }
+        .btn-brutal-secondary {
+            background-color: transparent;
+            color: var(--text-color) !important;
+            box-shadow: 4px 4px 0px var(--shadow-color);
+        }
+        .btn-brutal-secondary:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--shadow-color);
+            background-color: var(--neutral-light);
+        }
+        .btn-brutal-secondary:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--shadow-color);
+        }
+        .btn-brutal-pill {
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        /* Cards */
+        .card-type-a {
+            background-color: var(--card-bg-type-a);
+            color: var(--card-text-type-a);
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            padding: 2.5rem;
+            min-height: 290px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+        }
+        .card-type-b {
+            background-color: var(--card-bg-type-b);
+            color: var(--card-text-type-b);
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            padding: 2.5rem;
+            min-height: 290px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+        }
+        .card-type-a:hover, .card-type-b:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 6px 6px 0px var(--shadow-color);
+        }
+        
+        .arrow-circle-a {
+            background-color: var(--arrow-bg-a);
+            color: var(--arrow-color-a);
+            border-radius: 50%;
+            width: 41px;
+            height: 41px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s;
+        }
+        .arrow-circle-b {
+            background-color: var(--arrow-bg-b);
+            color: var(--arrow-color-b);
+            border-radius: 50%;
+            width: 41px;
+            height: 41px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s;
+        }
+        .card-type-a:hover .arrow-circle-a,
+        .card-type-b:hover .arrow-circle-b {
+            transform: rotate(45deg);
+        }
+
+        /* Banner Let's Make Things Happen */
+        .banner-brutal {
+            background-color: var(--banner-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            padding: 3.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        /* Case Study Banner */
+        .case-study-banner {
+            background-color: var(--card-bg-type-b);
+            color: var(--card-text-type-b);
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            padding: 3.5rem;
+            transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+        }
+        .case-study-col:not(:last-child) {
+            border-right: 1.5px solid var(--border-color);
+        }
+        @media (max-width: 768px) {
+            .case-study-col:not(:last-child) {
+                border-right: none;
+                border-bottom: 1.5px solid var(--border-color);
+                padding-bottom: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
+        .case-study-link {
+            color: var(--accent-color) !important;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s;
+        }
+        .case-study-link:hover {
+            gap: 0.8rem;
+        }
+
+        /* Portfolio Cards */
+        .portfolio-card {
+            background-color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .portfolio-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 5px 5px 0px var(--shadow-color);
+        }
+
+        .card-thumbnail-wrapper {
+            position: relative;
+            border-bottom: 2px solid var(--border-color);
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            background-color: var(--neutral-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-thumbnail-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 2;
+        }
+
+        /* Modal Customization */
+        .flat-modal-content {
+            background-color: var(--bg-color);
+            border: 2.5px solid var(--border-color) !important;
+            border-radius: 24px !important;
+            box-shadow: 6px 6px 0px var(--shadow-color) !important;
+            color: var(--text-color);
+        }
+        .btn-close-flat {
+            background: var(--neutral-light);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            font-weight: bold;
+            padding: 4px 12px;
+            font-family: monospace;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.15s;
+        }
+        .btn-close-flat:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* SVG Colors */
+        svg {
+            transition: all 0.3s;
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR (Navigasi Atas ala Tema Asril) -->
+    <!-- NAVBAR (Top Navigation Bar) -->
     <nav class="navbar navbar-expand-lg navbar-flat sticky-top py-3">
         <div class="container">
-            <a class="navbar-brand fw-bold text-uppercase tracking-wider" href="#">QOQO.DEV</a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#" style="font-size: 1.4rem; tracking: -0.5px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: var(--accent-color);">
+                    <path d="M12 0L15.3 8.7L24 12L15.3 15.3L12 24L8.7 15.3L0 12L8.7 8.7L12 0Z" fill="currentColor"/>
+                </svg>
+                <span>QOQO.DEV</span>
+            </a>
+            <button class="navbar-toggler border-2 border-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
@@ -133,91 +380,190 @@
                     <li class="nav-item"><a class="nav-link nav-link-flat" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link nav-link-flat" href="#books">Books</a></li>
                 </ul>
-                <button id="theme-toggle" class="btn-flat-outline px-3 py-1 mt-2 mt-lg-0">Dark Mode</button>
+                <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                    <button id="theme-toggle" class="btn-brutal btn-brutal-secondary btn-brutal-pill py-1.5 px-3" style="font-size: 0.9rem;">
+                        <i class="bi bi-moon-stars-fill me-2"></i>Dark Mode
+                    </button>
+                    <a href="mailto:phyrurizqi@gmail.com" class="btn-brutal btn-brutal-secondary btn-brutal-pill py-1.5 px-3" style="font-size: 0.9rem;">
+                        Request Quote
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- 1. PERKENALAN SINGKAT (Hero Section) -->
-    <section id="hero" class="d-flex align-items-center" style="min-height: 70vh;">
+    <!-- 1. INTRO (Hero Section) -->
+    <section id="hero" class="d-flex align-items-center" style="min-height: 80vh; padding: 60px 0;">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <span class="badge bg-light text-dark border mb-3 px-3 py-2 small fw-bold">AVAILABLE FOR HIRE</span>
-                    <h1 class="display-3 fw-bold text-uppercase mb-3">Hi, I'm Phyrurizqi Altiano Firdauzan</h1>
-                    <p class="fs-5 text-muted-custom mb-4">
-                        Informatics student specializing in robust multi-language software systems and adaptive hardware-software integration. Focused on creating functional, clean-coded solutions.
-                    </p>
-                    <div class="d-flex gap-3">
-                        <a href="#projects" class="btn-flat px-4 py-2 fw-semibold">View Projects</a>
-                        <a href="#books" class="btn-flat-outline px-4 py-2 fw-semibold">Read Book Summaries</a>
+            <div class="row align-items-center g-5">
+                <!-- Left Column: Content -->
+                <div class="col-lg-6 d-flex flex-column justify-content-between" style="min-height: 400px;">
+                    <div>
+                        <h1 class="display-3 fw-bold mb-4" style="line-height: 1.1; letter-spacing: -2px; font-size: calc(2rem + 2.5vw);">
+                            I am a software developer from Magelang.
+                        </h1>
+                        <p class="fs-5 opacity-75 mb-5" style="max-width: 480px; line-height: 1.6; font-weight: 500;">
+                            Building robust software architectures, low-latency mobile/web applications, and optimized robotics systems.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Image Frame -->
+                <div class="col-lg-6">
+                    <div class="portfolio-card p-0 overflow-hidden" style="border-radius: 30px; border-width: 2.5px; box-shadow: 8px 8px 0px var(--shadow-color);">
+                        <img src="assets/images/haerin.jpg" class="img-fluid w-100 d-block" style="object-fit: cover; aspect-ratio: 4/3; max-height: 480px;" alt="Phyrurizqi Altiano Firdauzan">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 2. ABOUT ME -->
-    <section id="about">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-md-4">
-                    <h3 class="fw-bold text-uppercase border-bottom border-2 pb-2 mb-0">About Me</h3>
-                </div>
-                <div class="col-md-8">
-                    <p class="fs-5 lh-base">
-                        Saya adalah seorang pengembang perangkat lunak dengan ketertarikan mendalam pada interkoneksi arsitektur sistem, jaringan backend, dan analisis infrastruktur keamanan data. Berkomitmen membangun alur logika kode yang efisien, transparan, dan mudah dirawat.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. TECHNICAL SKILLS -->
+    <!-- 2. ABOUT ME & TECHNICAL SKILLS -->
     <section id="skills">
         <div class="container">
-            <h3 class="fw-bold text-uppercase mb-4">Technical Skills</h3>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card flat-card h-100 p-3">
-                        <h6 class="fw-bold text-muted-custom mb-3">LANGUAGES</h6>
-                        <div class="d-flex flex-wrap gap-2">
-                            <span class="badge bg-light text-dark border">Java</span>
-                            <span class="badge bg-light text-dark border">Kotlin</span>
-                            <span class="badge bg-light text-dark border">Python</span>
-                            <span class="badge bg-light text-dark border">C++</span>
-                            <span class="badge bg-light text-dark border">JavaScript</span>
+            <div class="row g-5">
+                <!-- Left Column: About Me -->
+                <div class="col-lg-6">
+                    <div class="mb-4">
+                        <span class="btn-brutal btn-brutal-secondary btn-brutal-pill py-1.5 px-3 fs-6 mb-3" style="border-radius: 50px; cursor: default; background-color: var(--accent-color); color: var(--accent-text) !important;">
+                            Intro
+                        </span>
+                        <h2 class="display-4 fw-bold mb-4" style="letter-spacing: -1.5px;">ABOUT ME</h2>
+                        <p class="fs-5 opacity-75" style="line-height: 1.6; font-weight: 400;">
+                            Saya adalah seorang pengembang perangkat lunak dengan ketertarikan mendalam pada interkoneksi arsitektur sistem, jaringan backend, dan analisis infrastruktur keamanan data. Berkomitmen membangun alur logika kode yang efisien, transparan, dan mudah dirawat.
+                        </p>
+                    </div>
+
+                    <!-- Metrics Row (3 boxes) -->
+                    <div class="row g-3 mb-5">
+                        <!-- Metric 1: Experience -->
+                        <div class="col-4">
+                            <div class="portfolio-card text-center p-3 h-100 d-flex flex-column justify-content-center" style="border-radius: 16px;">
+                                <h3 class="fw-bold mb-0" style="font-size: 1.8rem; letter-spacing: -1px; color: var(--text-color);">2+</h3>
+                                <span class="small text-muted fw-bold" style="font-size: 0.75rem; text-transform: uppercase;">Years Exp</span>
+                            </div>
+                        </div>
+                        <!-- Metric 2: Projects -->
+                        <div class="col-4">
+                            <div class="portfolio-card text-center p-3 h-100 d-flex flex-column justify-content-center" style="border-radius: 16px;">
+                                <h3 class="fw-bold mb-0" style="font-size: 1.8rem; letter-spacing: -1px; color: var(--text-color);">10+</h3>
+                                <span class="small text-muted fw-bold" style="font-size: 0.75rem; text-transform: uppercase;">Projects</span>
+                            </div>
+                        </div>
+                        <!-- Metric 3: GPA (Accent Highlight) -->
+                        <div class="col-4">
+                            <div class="portfolio-card text-center p-3 h-100 d-flex flex-column justify-content-center" style="border-radius: 16px; background-color: var(--accent-color); border-color: var(--border-color);">
+                                <h3 class="fw-bold mb-0" style="font-size: 1.8rem; letter-spacing: -1px; color: var(--accent-text) !important;">3.7+</h3>
+                                <span class="small fw-bold" style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-text) !important;">GPA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Core competencies and languages -->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="portfolio-card p-4 h-100" style="border-radius: 16px;">
+                                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2" style="border-color: var(--border-color) !important;">
+                                    <h6 class="fw-bold mb-0 text-uppercase tracking-wider">Top Competencies</h6>
+                                    <span class="badge bg-dark text-white border border-dark" style="font-size: 0.7rem; border-radius: 4px;">CORE</span>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span class="badge bg-light text-dark border small">Web Development</span>
+                                    <span class="badge bg-light text-dark border small">Android Apps</span>
+                                    <span class="badge bg-light text-dark border small">Network Security</span>
+                                    <span class="badge bg-light text-dark border small">Robot Programming</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-card p-4 h-100" style="border-radius: 16px;">
+                                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2" style="border-color: var(--border-color) !important;">
+                                    <h6 class="fw-bold mb-0 text-uppercase tracking-wider">Languages Spoken</h6>
+                                    <span class="badge bg-dark text-white border border-dark" style="font-size: 0.7rem; border-radius: 4px;">SPEAK</span>
+                                </div>
+                                <div class="d-flex flex-column gap-2" style="font-size: 0.9rem;">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-bold">Indonesian</span>
+                                        <span class="text-muted text-end">Native</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-bold">Javanese</span>
+                                        <span class="text-muted text-end">Native</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-bold">English</span>
+                                        <span class="text-muted text-end">Professional</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card flat-card h-100 p-3">
-                        <h6 class="fw-bold text-muted-custom mb-3">WEB DEVELOPMENT</h6>
-                        <div class="d-flex flex-wrap gap-2">
-                            <span class="badge bg-light text-dark border">Laravel</span>
-                            <span class="badge bg-light text-dark border">ReactJS</span>
-                            <span class="badge bg-light text-dark border">Bootstrap 5</span>
-                            <span class="badge bg-light text-dark border">jQuery</span>
-                        </div>
+
+                <!-- Right Column: Technical Skills -->
+                <div class="col-lg-6">
+                    <div class="mb-4">
+                        <span class="btn-brutal btn-brutal-secondary btn-brutal-pill py-1.5 px-3 fs-6 mb-3" style="border-radius: 50px; cursor: default; background-color: var(--accent-color); color: var(--accent-text) !important;">
+                            Competencies
+                        </span>
+                        <h2 class="display-4 fw-bold mb-4" style="letter-spacing: -1.5px;">TECHNICAL SKILLS</h2>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card flat-card h-100 p-3">
-                        <h6 class="fw-bold text-muted-custom mb-3">INFRASTRUCTURE & UTILS</h6>
-                        <div class="d-flex flex-wrap gap-2">
-                            <span class="badge bg-light text-dark border">Cisco Packet Tracer</span>
-                            <span class="badge bg-light text-dark border">Wireshark</span>
-                            <span class="badge bg-light text-dark border">Git / GitHub</span>
+
+                    <!-- Skill Category Cards (4 boxes) -->
+                    <div class="d-flex flex-column gap-3">
+                        <!-- Programming Languages -->
+                        <div class="portfolio-card p-4" style="border-radius: 16px;">
+                            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2" style="border-color: var(--border-color) !important;">
+                                <h5 class="fw-bold mb-0 text-uppercase tracking-wider" style="font-size: 1.1rem; letter-spacing: -0.5px;">Programming Languages</h5>
+                                <span class="badge bg-dark text-white border border-dark" style="font-size: 0.75rem; border-radius: 4px;">ACTIVE</span>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge-brutal-normal py-1.5 px-3">Java</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">Kotlin</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">Python</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">C++</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">JavaScript</span>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card flat-card h-100 p-3">
-                        <h6 class="fw-bold text-muted-custom mb-3">DEVELOPMENT ENVIRONMENT</h6>
-                        <div class="d-flex flex-wrap gap-2">
-                            <span class="badge bg-light text-dark border">Android Studio</span>
-                            <span class="badge bg-light text-dark border">Jetpack Compose</span>
-                            <span class="badge bg-light text-dark border">VS Code</span>
+
+                        <!-- Web Development -->
+                        <div class="portfolio-card p-4" style="border-radius: 16px;">
+                            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2" style="border-color: var(--border-color) !important;">
+                                <h5 class="fw-bold mb-0 text-uppercase tracking-wider" style="font-size: 1.1rem; letter-spacing: -0.5px;">Web Development</h5>
+                                <span class="badge bg-dark text-white border border-dark" style="font-size: 0.75rem; border-radius: 4px;">ACTIVE</span>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge-brutal-normal py-1.5 px-3">Laravel</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">ReactJS</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">Bootstrap 5</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">jQuery</span>
+                            </div>
+                        </div>
+
+                        <!-- Infrastructure & Utils -->
+                        <div class="portfolio-card p-4" style="border-radius: 16px;">
+                            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2" style="border-color: var(--border-color) !important;">
+                                <h5 class="fw-bold mb-0 text-uppercase tracking-wider" style="font-size: 1.1rem; letter-spacing: -0.5px;">Infrastructure & Utils</h5>
+                                <span class="badge bg-dark text-white border border-dark" style="font-size: 0.75rem; border-radius: 4px;">ACTIVE</span>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge-brutal-normal py-1.5 px-3">Cisco Packet Tracer</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">Wireshark</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">Git / GitHub</span>
+                            </div>
+                        </div>
+
+                        <!-- Development Environment -->
+                        <div class="portfolio-card p-4" style="border-radius: 16px;">
+                            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2" style="border-color: var(--border-color) !important;">
+                                <h5 class="fw-bold mb-0 text-uppercase tracking-wider" style="font-size: 1.1rem; letter-spacing: -0.5px;">Development Environment</h5>
+                                <span class="badge bg-dark text-white border border-dark" style="font-size: 0.75rem; border-radius: 4px;">ACTIVE</span>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge-brutal-normal py-1.5 px-3">Android Studio</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">Jetpack Compose</span>
+                                <span class="badge-brutal-normal py-1.5 px-3">VS Code</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -225,50 +571,329 @@
         </div>
     </section>
 
-    <!-- 4. SERTIFIKAT YANG PERNAH DIDAPAT -->
-    <section id="certifications">
+    <!-- 4.5 JOURNEY ROADMAP -->
+    <section id="about" style="border-top: 2px solid var(--border-color); background-color: var(--bg-color);">
         <div class="container">
-            <h3 class="fw-bold text-uppercase mb-4">Certifications</h3>
-            <div class="row g-3">
-                <div class="col-12">
-                    <div class="card flat-card p-3 d-flex flex-row justify-content-between align-items-center">
-                        <div>
-                            <h6 class="fw-bold mb-1">Network Security Analysis Expert</h6>
-                            <small class="text-muted-custom">Platform Provider Certification &bull; 2026</small>
-                        </div>
-                        <span class="badge bg-dark">Verified</span>
+            <!-- Section Header -->
+            <div class="mb-5">
+                <span class="btn-brutal btn-brutal-secondary btn-brutal-pill py-1 px-3 fs-6 mb-3" style="border-radius: 50px; cursor: default;">
+                    Journey
+                </span>
+                <h2 class="display-4 fw-bold mb-3" style="letter-spacing: -1.5px;">A snapshot of my journey</h2>
+                <p class="fs-5 opacity-75" style="max-width: 700px; font-weight: 500;">
+                    An annual summary that summarizes my educational background, professional engineering milestones, and organizational involvement throughout the years.
+                </p>
+            </div>
+
+            <!-- Roadmap List -->
+            <div class="mt-5 border-top border-2" style="border-color: var(--border-color) !important;">
+                <!-- Item 1: SENIOR PROGRAMMER -->
+                <div class="row py-4 align-items-start border-bottom border-2" style="border-color: var(--border-color) !important;">
+                    <div class="col-md-9">
+                        <h3 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: -0.5px;">SENIOR PROGRAMMER - TEAM SAMBERGENi (KRSRI)</h3>
+                        <p class="opacity-75 mb-0" style="font-size: 1.05rem;">
+                            Memimpin tim programmer untuk mengoptimalkan performa komputasi robot, kontrol kinematika, navigasi otonom, dan visi komputer (computer vision) real-time untuk sepak bola robot KRSRI.
+                        </p>
+                    </div>
+                    <div class="col-md-3 text-md-end mt-2 mt-md-0">
+                        <span class="fw-bold fs-4" style="letter-spacing: -0.5px; color: var(--accent-color);">2025 - Present</span>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="card flat-card p-3 d-flex flex-row justify-content-between align-items-center">
-                        <div>
-                            <h6 class="fw-bold mb-1">Multi-Platform Android & Web Development Engagement</h6>
-                            <small class="text-muted-custom">Tech Academy Certificate &bull; 2025</small>
-                        </div>
-                        <span class="badge bg-dark">Verified</span>
+
+                <!-- Item 2: STAFF PROGRAMMER -->
+                <div class="row py-4 align-items-start border-bottom border-2" style="border-color: var(--border-color) !important;">
+                    <div class="col-md-9">
+                        <h3 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: -0.5px;">STAFF PROGRAMMER - TEAM SAMBERGENi (KRSRI)</h3>
+                        <p class="opacity-75 mb-0" style="font-size: 1.05rem;">
+                            Mengembangkan algoritma pergerakan omnidirectional, lokalisasi posisi berbasis sensor IMU & odometri, serta kontrol taktis tim robot sepak bola beroda.
+                        </p>
+                    </div>
+                    <div class="col-md-3 text-md-end mt-2 mt-md-0">
+                        <span class="fw-bold fs-4" style="letter-spacing: -0.5px; color: var(--accent-color);">2024 - 2025</span>
+                    </div>
+                </div>
+
+                <!-- Item 3: STAFF KASRAT -->
+                <div class="row py-4 align-items-start border-bottom border-2" style="border-color: var(--border-color) !important;">
+                    <div class="col-md-9">
+                        <h3 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: -0.5px;">STAFF KASRAT - JN UKMI UNS</h3>
+                        <p class="opacity-75 mb-0" style="font-size: 1.05rem;">
+                            Aktif merumuskan kajian strategis isu kampus, advokasi kemahasiswaan, dan menyelenggarakan program keumatan dalam kepengurusan UKM Kerohanian Islam (UKMI) UNS.
+                        </p>
+                    </div>
+                    <div class="col-md-3 text-md-end mt-2 mt-md-0">
+                        <span class="fw-bold fs-4" style="letter-spacing: -0.5px; color: var(--accent-color);">2024 - Present</span>
+                    </div>
+                </div>
+
+                <!-- Item 4: Universitas Sebelas Maret (UNS) -->
+                <div class="row py-4 align-items-start border-bottom border-2" style="border-color: var(--border-color) !important;">
+                    <div class="col-md-9">
+                        <h3 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: -0.5px;">Bachelor of Computer Science at Universitas Sebelas Maret (UNS)</h3>
+                        <p class="opacity-75 mb-0" style="font-size: 1.05rem;">
+                            Mahasiswa S1 Program Studi Informatika. Mendalami struktur data, algoritma, rekayasa perangkat lunak, sistem basis data, keamanan jaringan, dan kecerdasan buatan.
+                        </p>
+                    </div>
+                    <div class="col-md-3 text-md-end mt-2 mt-md-0">
+                        <span class="fw-bold fs-4" style="letter-spacing: -0.5px; color: var(--accent-color);">2023 - Present</span>
+                    </div>
+                </div>
+
+                <!-- Item 5: MAN Kota Magelang -->
+                <div class="row py-4 align-items-start border-bottom border-2" style="border-color: var(--border-color) !important;">
+                    <div class="col-md-9">
+                        <h3 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: -0.5px;">MAN Kota Magelang</h3>
+                        <p class="opacity-75 mb-0" style="font-size: 1.05rem;">
+                            Pendidikan Menengah Atas dengan peminatan Matematika & Ilmu Pengetahuan Alam (MIPA). Aktif dalam olimpiade sains dan ekstrakurikuler teknologi informasi.
+                        </p>
+                    </div>
+                    <div class="col-md-3 text-md-end mt-2 mt-md-0">
+                        <span class="fw-bold fs-4" style="letter-spacing: -0.5px; color: var(--accent-color);">2020 - 2023</span>
+                    </div>
+                </div>
+
+                <!-- Item 6: SMPN 2 Kota Magelang -->
+                <div class="row py-4 align-items-start border-bottom border-2" style="border-color: var(--border-color) !important;">
+                    <div class="col-md-9">
+                        <h3 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: -0.5px;">SMPN 2 Kota Magelang</h3>
+                        <p class="opacity-75 mb-0" style="font-size: 1.05rem;">
+                            Pendidikan Menengah Pertama. Merintis ketertarikan awal pada pemrograman dasar dan logika matematika komputer.
+                        </p>
+                    </div>
+                    <div class="col-md-3 text-md-end mt-2 mt-md-0">
+                        <span class="fw-bold fs-4" style="letter-spacing: -0.5px; color: var(--accent-color);">2017 - 2020</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. PROJEK YANG PERNAH/SUDAH DILAKUKAN -->
+    <!-- 5. TECHNICAL CERTIFICATIONS -->
+    <section id="certifications" style="background-color: var(--neutral-light);">
+        <div class="container">
+            <h2 class="fw-bold mb-5 text-center text-uppercase" style="letter-spacing: -1px;">Technical Certifications</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-8">
+                    <div class="portfolio-card d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
+                        <div>
+                            <h4 class="fw-bold mb-1">Network Security Analysis Expert</h4>
+                            <p class="text-muted mb-0">Platform Provider Certification &bull; 2026</p>
+                        </div>
+                        <span class="btn-brutal btn-brutal-secondary py-1 px-3 fs-6" style="border-radius: 8px; cursor: default;">
+                            <i class="bi bi-patch-check-fill text-primary me-2"></i>Verified
+                        </span>
+                    </div>
+                    
+                    <div class="portfolio-card d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                        <div>
+                            <h4 class="fw-bold mb-1">Multi-Platform Android & Web Development Engagement</h4>
+                            <p class="text-muted mb-0">Tech Academy Certificate &bull; 2025</p>
+                        </div>
+                        <span class="btn-brutal btn-brutal-secondary py-1 px-3 fs-6" style="border-radius: 8px; cursor: default;">
+                            <i class="bi bi-patch-check-fill text-primary me-2"></i>Verified
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FEATURED PROJECTS -->
     <section id="projects">
         <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="fw-bold text-uppercase m-0">Featured Projects</h3>
-                <a href="projects/list-projects.html" class="btn-flat-outline px-3 py-1.5 small">View All Projects</a>
+            <!-- Header Row -->
+            <div class="mb-5 text-center">
+                <h2 class="display-4 fw-bold mb-2 text-uppercase" style="letter-spacing: -1.5px;">Featured Projects</h2>
+                <p class="fs-5 opacity-75 mb-0 mx-auto" style="max-width: 580px; font-weight: 500;">
+                    Exploring the frontiers of technology through web platforms, robotics firmware, and predictive AI algorithms.
+                </p>
             </div>
-            <!-- Diisi Cuplikan Proyek Unggulan Dinamis via JS portofoliomu -->
+            
             <div id="featured-projects-grid" class="row row-cols-1 row-cols-md-3 g-4">
-                <!-- Data dummy card flat -->
+                <!-- Project 1: Prompt Refiner -->
                 <div class="col">
-                    <div class="card h-100 flat-card">
-                        <div class="card-body p-3">
-                            <h5 class="fw-bold mb-1">Tourism Information System</h5>
-                            <p class="text-muted small mb-3">Laravel, React, Kotlin</p>
-                            <p class="small text-secondary">Cross-platform tourism hub application with integrated smart trip planners and interactive geographic maps.</p>
-                            <button class="btn-flat w-100 text-center py-1.5 mt-2 small" data-bs-toggle="modal" data-bs-target="#projectDetailModal">Lihat Detail</button>
+                    <div class="portfolio-card h-100 d-flex flex-column justify-content-between p-0 overflow-hidden" style="border-width: 2.5px;">
+                        <div>
+                            <!-- Thumbnail Wrapper -->
+                            <div class="card-thumbnail-wrapper">
+                                <span class="badge bg-dark text-white border border-dark card-thumbnail-badge px-2.5 py-1" style="font-size: 0.75rem; border-radius: 6px;">Website</span>
+                                <!-- SVG Browser mockup -->
+                                <svg class="w-100 h-100" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="320" height="200" fill="#1E1E24"/>
+                                    <rect width="320" height="20" fill="#121214"/>
+                                    <circle cx="10" cy="10" r="3" fill="#FF5F56"/>
+                                    <circle cx="18" cy="10" r="3" fill="#FFBD2E"/>
+                                    <circle cx="26" cy="10" r="3" fill="#27C93F"/>
+                                    <rect x="0" y="20" width="60" height="180" fill="#141416"/>
+                                    <rect x="8" y="32" width="44" height="6" rx="2" fill="#3E3F42"/>
+                                    <rect x="8" y="44" width="44" height="6" rx="2" fill="#2A2A2D"/>
+                                    <rect x="8" y="56" width="44" height="6" rx="2" fill="#2A2A2D"/>
+                                    <rect x="72" y="32" width="236" height="100" rx="6" fill="#25262B" stroke="#3E3F42" stroke-width="1.5"/>
+                                    <text x="82" y="52" fill="#8A8F98" font-family="monospace" font-size="8">System Prompt:</text>
+                                    <text x="82" y="66" fill="#FFFFFF" font-family="monospace" font-size="8" font-weight="bold">You are a helpful coding assistant...</text>
+                                    <rect x="72" y="142" width="236" height="20" rx="4" fill="#3E3F42"/>
+                                    <rect x="72" y="170" width="100" height="20" rx="4" fill="var(--accent-color)"/>
+                                    <text x="82" y="182" fill="#FFFFFF" font-family="sans-serif" font-size="8" font-weight="bold">Refine Prompt</text>
+                                </svg>
+                            </div>
+                            
+                            <!-- Card Info Details -->
+                            <div class="p-4">
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="badge bg-light text-dark border small" style="border-radius: 4px;">Python</span>
+                                    <span class="badge bg-light text-dark border small" style="border-radius: 4px;">Streamlit</span>
+                                    <span class="badge bg-light text-dark border small" style="border-radius: 4px;">AI</span>
+                                </div>
+                                <h3 class="fw-bold mb-2" style="font-size: 1.4rem; letter-spacing: -0.5px;">PROMPT REFINER</h3>
+                                <p class="small opacity-75 mb-0" style="line-height: 1.6;">
+                                    AI prompt engineering workbench. Optimizes LLM response accuracy by 40% using dynamic prompt expansion, contextual formatting templates, and real-time token count estimation.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons and Link -->
+                        <div class="px-4 pb-4">
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    <a href="https://github.com/phyrurizqi" target="_blank" class="btn-brutal btn-brutal-secondary w-100 py-2 fs-6 text-center" style="border-radius: 8px;">
+                                        <i class="bi bi-github me-1"></i> CODE
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" class="btn-brutal btn-brutal-primary w-100 py-2 fs-6 text-center" style="border-radius: 8px; background-color: var(--accent-color); color: var(--accent-text) !important; border-color: var(--border-color);">
+                                        DEMO <i class="bi bi-box-arrow-up-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <button class="btn-brutal w-100 py-2.5 text-center d-flex align-items-center justify-content-center gap-2" style="border-radius: 10px; background-color: var(--accent-color); color: var(--accent-text) !important; border-color: var(--border-color);" data-bs-toggle="modal" data-bs-target="#projectDetailModal">
+                                <span>CASE STUDY</span> <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Ambatuwork -->
+                <div class="col">
+                    <div class="portfolio-card h-100 d-flex flex-column justify-content-between p-0 overflow-hidden" style="border-width: 2.5px;">
+                        <div>
+                            <!-- Thumbnail Wrapper -->
+                            <div class="card-thumbnail-wrapper">
+                                <div class="card-thumbnail-badge d-flex gap-1">
+                                    <span class="badge bg-dark text-white border border-dark px-2.5 py-1" style="font-size: 0.75rem; border-radius: 6px;">Website</span>
+                                    <span class="badge bg-dark text-white border border-dark px-2.5 py-1" style="font-size: 0.75rem; border-radius: 6px;">Mobile Apps</span>
+                                </div>
+                                <!-- SVG Browser mockup -->
+                                <svg class="w-100 h-100" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="320" height="200" fill="#EAAA3A"/>
+                                    <circle cx="230" cy="110" r="42" fill="#FFFFFF" stroke="#191A23" stroke-width="2"/>
+                                    <path d="M198 90 C198 80, 220 72, 230 72 C240 72, 262 80, 262 90 Z" fill="#3D2B1F" stroke="#191A23" stroke-width="2"/>
+                                    <circle cx="218" cy="104" r="9" fill="#FFFFFF" stroke="#191A23" stroke-width="2"/>
+                                    <circle cx="242" cy="104" r="9" fill="#FFFFFF" stroke="#191A23" stroke-width="2"/>
+                                    <circle cx="218" cy="104" r="2.5" fill="#191A23"/>
+                                    <circle cx="242" cy="104" r="2.5" fill="#191A23"/>
+                                    <path d="M227 104 L233 104" stroke="#191A23" stroke-width="2"/>
+                                    <path d="M220 120 Q230 130 240 120" stroke="#191A23" stroke-width="2.5" fill="none"/>
+                                    <rect x="235" y="125" width="18" height="22" rx="3" fill="#ECE0D1" stroke="#191A23" stroke-width="1.5" transform="rotate(10 235 125)"/>
+                                    <rect x="237" y="132" width="16" height="8" fill="#3D2B1F"/>
+                                    <text x="25" y="65" fill="#191A23" font-family="sans-serif" font-size="17" font-weight="900">Make everyone</text>
+                                    <text x="25" y="85" fill="#191A23" font-family="sans-serif" font-size="17" font-weight="900">do their work!</text>
+                                    <rect x="25" y="102" width="55" height="16" rx="4" fill="#191A23"/>
+                                    <text x="31" y="113" fill="#FFFFFF" font-family="sans-serif" font-size="7" font-weight="bold">Website</text>
+                                </svg>
+                            </div>
+                            
+                            <!-- Card Info Details -->
+                            <div class="p-4">
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="badge bg-light text-dark border small" style="border-radius: 4px;">PHP</span>
+                                    <span class="badge bg-light text-dark border small" style="border-radius: 4px;">Laravel</span>
+                                    <span class="badge bg-light text-dark border small" style="border-radius: 4px;">Kotlin</span>
+                                    <span class="badge bg-light text-dark border small" style="border-radius: 4px;">Android</span>
+                                </div>
+                                <h3 class="fw-bold mb-2" style="font-size: 1.4rem; letter-spacing: -0.5px;">AMBATUWORK</h3>
+                                <p class="small opacity-75 mb-0" style="line-height: 1.6;">
+                                    Collaboration platform for tracking student group project progress, assigning roles, evaluating contributions, and managing tasks.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons and Link -->
+                        <div class="px-4 pb-4">
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    <a href="https://github.com/phyrurizqi" target="_blank" class="btn-brutal btn-brutal-secondary w-100 py-2 fs-6 text-center" style="border-radius: 8px;">
+                                        <i class="bi bi-github me-1"></i> CODE
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" class="btn-brutal btn-brutal-primary w-100 py-2 fs-6 text-center" style="border-radius: 8px; background-color: var(--accent-color); color: var(--accent-text) !important; border-color: var(--border-color);">
+                                        DEMO <i class="bi bi-box-arrow-up-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <button class="btn-brutal w-100 py-2.5 text-center d-flex align-items-center justify-content-center gap-2" style="border-radius: 10px; background-color: var(--accent-color); color: var(--accent-text) !important; border-color: var(--border-color);" data-bs-toggle="modal" data-bs-target="#projectDetailModal">
+                                <span>CASE STUDY</span> <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Jakarta AQI Predictor -->
+                <div class="col">
+                    <div class="portfolio-card h-100 d-flex flex-column justify-content-between p-0 overflow-hidden" style="border-width: 2.5px;">
+                        <div>
+                            <!-- Thumbnail Wrapper -->
+                            <div class="card-thumbnail-wrapper">
+                                <div class="card-thumbnail-badge d-flex gap-1">
+                                    <span class="badge bg-dark text-white border border-dark px-2.5 py-1" style="font-size: 0.75rem; border-radius: 6px;">Machine Learning</span>
+                                    <span class="badge bg-dark text-white border border-dark px-2.5 py-1" style="font-size: 0.75rem; border-radius: 6px;">Website</span>
+                                </div>
+                                <!-- SVG Browser mockup -->
+                                <svg class="w-100 h-100" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="320" height="200" fill="#15171E"/>
+                                    <rect x="15" y="30" width="180" height="140" rx="8" fill="#1C1E26" stroke="#2D303D" stroke-width="1.5"/>
+                                    <circle cx="250" cy="100" r="32" fill="none" stroke="#2D303D" stroke-width="5"/>
+                                    <path d="M218 100 A32 32 0 1 1 272 128" fill="none" stroke="var(--accent-color)" stroke-width="5" stroke-linecap="round"/>
+                                    <text x="250" y="105" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">127</text>
+                                    <text x="250" y="142" fill="#8A8F98" font-family="sans-serif" font-size="7" text-anchor="middle">AQI - Unhealthy</text>
+                                    <text x="28" y="55" fill="#10B981" font-family="sans-serif" font-size="10" font-weight="bold">Jakarta Air Quality</text>
+                                    <text x="28" y="68" fill="#FFFFFF" font-family="sans-serif" font-size="10" font-weight="bold">Predictor</text>
+                                    <path d="M28 140 L60 120 L95 135 L130 100 L165 110" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+                                    <circle cx="130" cy="100" r="3" fill="#10B981"/>
+                                </svg>
+                            </div>
+                            
+                            <!-- Card Info Details -->
+                            <div class="p-4">
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="badge bg-light text-dark border small" style="border-radius: 4px;">Next.js</span>
+                                    <span class="badge bg-light text-dark border small" style="border-radius: 4px;">Python</span>
+                                    <span class="badge bg-light text-dark border small" style="border-radius: 4px;">Regression</span>
+                                </div>
+                                <h3 class="fw-bold mb-2" style="font-size: 1.4rem; letter-spacing: -0.5px;">JAKARTA AQI PREDICTOR</h3>
+                                <p class="small opacity-75 mb-0" style="line-height: 1.6;">
+                                    Real-time Air Quality Index (AQI) monitoring dashboard using public BMKG data and machine learning regression algorithms for the Jakarta area.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons and Link -->
+                        <div class="px-4 pb-4">
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    <a href="https://github.com/phyrurizqi" target="_blank" class="btn-brutal btn-brutal-secondary w-100 py-2 fs-6 text-center" style="border-radius: 8px;">
+                                        <i class="bi bi-github me-1"></i> CODE
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" class="btn-brutal btn-brutal-primary w-100 py-2 fs-6 text-center" style="border-radius: 8px; background-color: var(--accent-color); color: var(--accent-text) !important; border-color: var(--border-color);">
+                                        DEMO <i class="bi bi-box-arrow-up-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <button class="btn-brutal w-100 py-2.5 text-center d-flex align-items-center justify-content-center gap-2" style="border-radius: 10px; background-color: var(--accent-color); color: var(--accent-text) !important; border-color: var(--border-color);" data-bs-toggle="modal" data-bs-target="#projectDetailModal">
+                                <span>CASE STUDY</span> <i class="bi bi-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -276,53 +901,340 @@
         </div>
     </section>
 
-    <!-- 6. RANGKUMAN BUKU (Menggantikan Mini Games) -->
-    <section id="books">
-        <div class="container text-center">
-            <h3 class="fw-bold text-uppercase mb-3">Book Summaries & Insights</h3>
-            <p class="text-muted-custom small mb-4 mx-auto" style="max-width: 500px;">
+    <!-- 7. BOOK SUMMARIES -->
+    <section id="books" style="background-color: var(--neutral-light); border-top: 2px solid var(--border-color); border-bottom: 2px solid var(--border-color);">
+        <div class="container py-4">
+            <h2 class="fw-bold mb-3 text-center text-uppercase" style="letter-spacing: -1px;">Book Summaries & Insights</h2>
+            <p class="fs-5 opacity-75 mb-5 text-center mx-auto" style="max-width: 600px; line-height: 1.6;">
                 Catatan personal, intisari produktivitas kreatif, geopolitik, serta narasi literatur klasik pilihan yang saya pelajari dari buku-buku favorit.
             </p>
-            <!-- Tombol bawaan diskusimu -->
-            <div class="text-center mt-4">
-                <a href="user/view/list-book.html" class="btn-flat px-4 py-2 fw-bold">[cite: 5]
-                    Explore more books summary &raquo;[cite: 5]
-                </a>[cite: 5]
+            
+            <!-- Books Cards Grid -->
+            <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                <!-- Book 1 -->
+                <div class="col">
+                    <div class="portfolio-card h-100 d-flex flex-column justify-content-between p-0 overflow-hidden" style="background-color: var(--bg-color); border-width: 2.5px;">
+                        <div>
+                            <!-- Cover Wrapper -->
+                            <div class="py-4 border-bottom border-2" style="background-color: var(--neutral-light); border-color: var(--border-color) !important;">
+                                <!-- Show Your Work Cover -->
+                                <svg class="d-block mx-auto" width="120" height="175" viewBox="0 0 120 175" fill="none" xmlns="http://www.w3.org/2000/svg" style="border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color);">
+                                    <rect width="120" height="175" fill="#191A23"/>
+                                    <rect x="0" y="65" width="120" height="35" fill="var(--accent-color)"/>
+                                    <text x="60" y="40" fill="#FFFFFF" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle" letter-spacing="1">AUSTIN KLEON</text>
+                                    <text x="60" y="80" fill="#FFFFFF" font-family="sans-serif" font-size="10" font-weight="900" text-anchor="middle" letter-spacing="0.5">SHOW YOUR</text>
+                                    <text x="60" y="94" fill="#FFFFFF" font-family="sans-serif" font-size="10" font-weight="900" text-anchor="middle" letter-spacing="0.5">WORK!</text>
+                                    <text x="60" y="130" fill="#8A8F98" font-family="sans-serif" font-size="6" text-anchor="middle">10 WAYS TO GET DISCOVERED</text>
+                                </svg>
+                            </div>
+                            
+                            <div class="p-4">
+                                <span class="badge bg-dark text-white border border-dark mb-2 px-2.5 py-1" style="font-size: 0.8rem; border-radius: 6px;">Productivity</span>
+                                <h4 class="fw-bold mb-1" style="letter-spacing: -0.5px;">Show Your Work!</h4>
+                                <p class="text-muted small mb-3">Oleh: Austin Kleon</p>
+                                <p class="small opacity-75 mb-0" style="line-height: 1.6;">
+                                    Catatan praktis tentang pentingnya membagikan proses kreatif Anda agar dapat ditemukan oleh orang lain yang sefrekuensi.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-4">
+                            <a href="books/detail-book.html?book=show-your-work" class="btn-brutal btn-brutal-primary w-100 py-2.5 text-center" style="font-size: 0.95rem;">
+                                Baca Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 2 -->
+                <div class="col">
+                    <div class="portfolio-card h-100 d-flex flex-column justify-content-between p-0 overflow-hidden" style="background-color: var(--bg-color); border-width: 2.5px;">
+                        <div>
+                            <!-- Cover Wrapper -->
+                            <div class="py-4 border-bottom border-2" style="background-color: var(--neutral-light); border-color: var(--border-color) !important;">
+                                <!-- The Prince Cover -->
+                                <svg class="d-block mx-auto" width="120" height="175" viewBox="0 0 120 175" fill="none" xmlns="http://www.w3.org/2000/svg" style="border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color);">
+                                    <rect width="120" height="175" fill="#1D2A44"/>
+                                    <path d="M60 65 L48 72 V85 C48 95 60 102 60 102 C60 102 72 95 72 85 V72 L60 65 Z" fill="none" stroke="var(--accent-color)" stroke-width="2"/>
+                                    <circle cx="60" cy="80" r="4" fill="var(--accent-color)"/>
+                                    <text x="60" y="35" fill="#C0A060" font-family="serif" font-size="7" font-weight="bold" text-anchor="middle" letter-spacing="1.5">NICCOLÒ MACHIAVELLI</text>
+                                    <text x="60" y="125" fill="#C0A060" font-family="serif" font-size="12" font-weight="bold" text-anchor="middle" letter-spacing="1">THE PRINCE</text>
+                                    <text x="60" y="145" fill="#8A8F98" font-family="sans-serif" font-size="5" text-anchor="middle">CLASSIC GEOPOLITICS</text>
+                                </svg>
+                            </div>
+                            
+                            <div class="p-4">
+                                <span class="badge bg-dark text-white border border-dark mb-2 px-2.5 py-1" style="font-size: 0.8rem; border-radius: 6px;">Geopolitics</span>
+                                <h4 class="fw-bold mb-1" style="letter-spacing: -0.5px;">The Prince</h4>
+                                <p class="text-muted small mb-3">Oleh: Niccolò Machiavelli</p>
+                                <p class="small opacity-75 mb-0" style="line-height: 1.6;">
+                                    Analisis klasik mengenai kepemimpinan politik, taktik kekuasaan negara, diplomasi pragmatis, dan realitas sosiologi politik.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-4">
+                            <a href="books/detail-book.html?book=the-prince" class="btn-brutal btn-brutal-primary w-100 py-2.5 text-center" style="font-size: 0.95rem;">
+                                Baca Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 3 -->
+                <div class="col">
+                    <div class="portfolio-card h-100 d-flex flex-column justify-content-between p-0 overflow-hidden" style="background-color: var(--bg-color); border-width: 2.5px;">
+                        <div>
+                            <!-- Cover Wrapper -->
+                            <div class="py-4 border-bottom border-2" style="background-color: var(--neutral-light); border-color: var(--border-color) !important;">
+                                <!-- Metamorphosis Cover -->
+                                <svg class="d-block mx-auto" width="120" height="175" viewBox="0 0 120 175" fill="none" xmlns="http://www.w3.org/2000/svg" style="border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color);">
+                                    <rect width="120" height="175" fill="#2E1C2B"/>
+                                    <g transform="translate(45, 60)">
+                                        <line x1="5" y1="20" x2="-8" y2="10" stroke="#8A8F98" stroke-width="2"/>
+                                        <line x1="25" y1="20" x2="38" y2="10" stroke="#8A8F98" stroke-width="2"/>
+                                        <line x1="5" y1="30" x2="-8" y2="35" stroke="#8A8F98" stroke-width="2"/>
+                                        <line x1="25" y1="30" x2="38" y2="35" stroke="#8A8F98" stroke-width="2"/>
+                                        <ellipse cx="15" cy="25" rx="10" ry="16" fill="var(--accent-color)" stroke="#191A23" stroke-width="1.5"/>
+                                        <circle cx="15" cy="6" r="6" fill="#191A23"/>
+                                    </g>
+                                    <text x="60" y="30" fill="#FFFFFF" font-family="monospace" font-size="8" text-anchor="middle" letter-spacing="1">FRANZ KAFKA</text>
+                                    <text x="60" y="125" fill="#C3573F" font-family="monospace" font-size="9" font-weight="bold" text-anchor="middle" letter-spacing="0.5">METAMORPHOSIS</text>
+                                    <text x="60" y="145" fill="#8A8F98" font-family="sans-serif" font-size="5" text-anchor="middle">EXISTENTIAL FICTION</text>
+                                </svg>
+                            </div>
+                            
+                            <div class="p-4">
+                                <span class="badge bg-dark text-white border border-dark mb-2 px-2.5 py-1" style="font-size: 0.8rem; border-radius: 6px;">Literature</span>
+                                <h4 class="fw-bold mb-1" style="letter-spacing: -0.5px;">Metamorphosis</h4>
+                                <p class="text-muted small mb-3">Oleh: Franz Kafka</p>
+                                <p class="small opacity-75 mb-0" style="line-height: 1.6;">
+                                    Sebuah novel alegoris yang mendalam tentang keterasingan sosial, tekanan eksistensial, dan absurditas kehidupan modern.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-4">
+                            <a href="books/detail-book.html?book=metamorphosis" class="btn-brutal btn-brutal-primary w-100 py-2.5 text-center" style="font-size: 0.95rem;">
+                                Baca Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="books/list-books.html" class="btn-brutal btn-brutal-secondary px-5 py-3 fw-bold fs-5">
+                    Explore book summaries <i class="bi bi-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="py-4 bg-light border-top text-center">
-        <p class="small text-muted mb-0">&copy; 2026 Qoqo Dev Portfolio. Built flat with Bootstrap 5.</p>
+    <!-- 8. CONTACT SECTION -->
+    <section id="contact" style="border-top: 2px solid var(--border-color); background-color: var(--bg-color); padding: 80px 0;">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <!-- Left Column -->
+                <div class="col-lg-6">
+                    <div class="mb-4">
+                        <span class="btn-brutal btn-brutal-secondary btn-brutal-pill py-1.5 px-3 fs-6 mb-3" style="border-radius: 50px; cursor: default; background-color: var(--accent-color); color: var(--accent-text) !important;">
+                            Get in touch
+                        </span>
+                        <h2 class="display-4 fw-bold mb-4" style="letter-spacing: -1.5px; line-height: 1.1;">LET'S BUILD THE FUTURE TOGETHER</h2>
+                        <p class="fs-5 opacity-75" style="line-height: 1.6;">
+                            I am open to internship opportunities, research collaborations, and freelance projects. Whether you have a hardware setup to debug or a modern web platform to architect, feel free to drop a message.
+                        </p>
+                    </div>
+
+                    <!-- Contact Detail Cards -->
+                    <div class="d-flex flex-column gap-3 mt-5">
+                        <!-- Email Link -->
+                        <a href="mailto:phyrurizqi@gmail.com" class="portfolio-card d-flex align-items-center justify-content-between p-3 text-decoration-none text-reset" style="border-radius: 12px;">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="bi bi-envelope-fill fs-4" style="color: var(--accent-color);"></i>
+                                <span class="fw-bold" style="font-size: 1.05rem;">phyrurizqi@gmail.com</span>
+                            </div>
+                            <i class="bi bi-arrow-up-right fs-5"></i>
+                        </a>
+
+                        <!-- GitHub Link -->
+                        <a href="https://github.com/phyrurizqi" target="_blank" class="portfolio-card d-flex align-items-center justify-content-between p-3 text-decoration-none text-reset" style="border-radius: 12px;">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="bi bi-github fs-4" style="color: var(--accent-color);"></i>
+                                <span class="fw-bold" style="font-size: 1.05rem;">github.com/phyrurizqi</span>
+                            </div>
+                            <i class="bi bi-arrow-up-right fs-5"></i>
+                        </a>
+
+                        <!-- LinkedIn Link -->
+                        <a href="https://linkedin.com/in/phyrurizqi" target="_blank" class="portfolio-card d-flex align-items-center justify-content-between p-3 text-decoration-none text-reset" style="border-radius: 12px;">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="bi bi-linkedin fs-4" style="color: var(--accent-color);"></i>
+                                <span class="fw-bold" style="font-size: 1.05rem;">Phyrurizqi Altiano Firdauzan</span>
+                            </div>
+                            <i class="bi bi-arrow-up-right fs-5"></i>
+                        </a>
+
+                        <!-- Instagram Link -->
+                        <a href="https://instagram.com/phyrurizqi" target="_blank" class="portfolio-card d-flex align-items-center justify-content-between p-3 text-decoration-none text-reset" style="border-radius: 12px;">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="bi bi-instagram fs-4" style="color: var(--accent-color);"></i>
+                                <span class="fw-bold" style="font-size: 1.05rem;">@phyrurizqi</span>
+                            </div>
+                            <i class="bi bi-arrow-up-right fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column (The Brutalist Form Box) -->
+                <div class="col-lg-6">
+                    <div class="portfolio-card p-4 p-md-5" style="border-radius: 24px; background-color: var(--neutral-light); border-width: 2.5px;">
+                        <!-- Custom Tab Buttons -->
+                        <div class="row g-2 mb-4">
+                            <div class="col-6">
+                                <button type="button" id="tab-email" class="btn-brutal btn-brutal-primary w-100 py-2 fs-6" style="border-radius: 10px; font-weight:700;" onclick="switchContactTab('email')">
+                                    EMAIL
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" id="tab-anon" class="btn-brutal btn-brutal-secondary w-100 py-2 fs-6" style="border-radius: 10px; font-weight:700;" onclick="switchContactTab('anon')">
+                                    ANONYMOUS
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Form Title -->
+                        <h4 id="send-via-title" class="fw-bold mb-4 text-uppercase tracking-wider" style="font-size: 1.15rem; letter-spacing: -0.5px;">
+                            <i class="bi bi-envelope-fill me-2" style="color: var(--accent-color);"></i>SEND VIA EMAIL
+                        </h4>
+
+                        <!-- Email Form Container -->
+                        <div id="form-email-container">
+                            <form action="https://formspree.io/f/your-id" method="POST">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold small text-uppercase" style="letter-spacing: 0.5px;">Full Name</label>
+                                    <input type="text" name="name" class="form-control" placeholder="John Doe" required style="border: 2px solid var(--border-color); border-radius: 10px; padding: 0.75rem; background-color: var(--bg-color); color: var(--text-color);">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold small text-uppercase" style="letter-spacing: 0.5px;">Email Address</label>
+                                    <input type="email" name="email" class="form-control" placeholder="john@example.com" required style="border: 2px solid var(--border-color); border-radius: 10px; padding: 0.75rem; background-color: var(--bg-color); color: var(--text-color);">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold small text-uppercase" style="letter-spacing: 0.5px;">Message Details</label>
+                                    <textarea name="message" class="form-control" rows="4" placeholder="Explain your project goals..." required style="border: 2px solid var(--border-color); border-radius: 10px; padding: 0.75rem; background-color: var(--bg-color); color: var(--text-color);"></textarea>
+                                </div>
+                                <button type="submit" class="btn-brutal btn-brutal-primary w-100 py-3 d-flex align-items-center justify-content-center gap-2" style="border-radius: 12px; background-color: var(--accent-color); color: var(--accent-text) !important; border-color: var(--border-color);">
+                                    <span>SEND MAIL</span> <i class="bi bi-send-fill"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Anonymous Form Container -->
+                        <div id="form-anon-container" class="d-none">
+                            <form action="https://formspree.io/f/your-id" method="POST">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold small text-uppercase" style="letter-spacing: 0.5px;">Subject / Topic</label>
+                                    <input type="text" name="subject" class="form-control" placeholder="Feedback / Random thought" required style="border: 2px solid var(--border-color); border-radius: 10px; padding: 0.75rem; background-color: var(--bg-color); color: var(--text-color);">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold small text-uppercase" style="letter-spacing: 0.5px;">Anonymous Message</label>
+                                    <textarea name="message" class="form-control" rows="5" placeholder="Write anything, completely anonymous..." required style="border: 2px solid var(--border-color); border-radius: 10px; padding: 0.75rem; background-color: var(--bg-color); color: var(--text-color);"></textarea>
+                                </div>
+                                <button type="submit" class="btn-brutal btn-brutal-primary w-100 py-3 d-flex align-items-center justify-content-center gap-2" style="border-radius: 12px; background-color: var(--accent-color); color: var(--accent-text) !important; border-color: var(--border-color);">
+                                    <span>SEND ANONYMOUSLY</span> <i class="bi bi-incognito"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REDESIGNED FOOTER -->
+    <footer class="py-5 border-top border-2" style="border-color: var(--border-color) !important; background-color: var(--bg-color); color: var(--text-color);">
+        <div class="container">
+            <div class="row g-4 justify-content-between align-items-start mb-5 text-start">
+                <!-- Left Column -->
+                <div class="col-lg-5">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="fw-bold px-3 py-1.5 fs-4" style="background-color: var(--text-color); color: var(--bg-color); border-radius: 8px; border: 2px solid var(--border-color);">
+                            QOQO
+                        </span>
+                        <span class="badge bg-dark text-white border border-dark px-2.5 py-1.5" style="border-radius: 6px; font-weight: 700;">.DEV</span>
+                    </div>
+                    <p class="opacity-75 mb-4" style="font-size: 1rem; line-height: 1.6; max-width: 440px;">
+                        Informatics engineering student at Universitas Sebelas Maret (UNS) specializing in robust software architectures, network analysis, and low-latency robotics systems.
+                    </p>
+                    <!-- Social icons -->
+                    <div class="d-flex gap-2">
+                        <a href="https://github.com/phyrurizqi" target="_blank" class="portfolio-card p-2 d-inline-flex align-items-center justify-content-center text-decoration-none text-reset" style="border-radius: 8px; width: 40px; height: 40px;">
+                            <i class="bi bi-github fs-5"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/phyrurizqi" target="_blank" class="portfolio-card p-2 d-inline-flex align-items-center justify-content-center text-decoration-none text-reset" style="border-radius: 8px; width: 40px; height: 40px;">
+                            <i class="bi bi-linkedin fs-5"></i>
+                        </a>
+                        <a href="https://instagram.com/phyrurizqi" target="_blank" class="portfolio-card p-2 d-inline-flex align-items-center justify-content-center text-decoration-none text-reset" style="border-radius: 8px; width: 40px; height: 40px;">
+                            <i class="bi bi-instagram fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-lg-5">
+                    <h5 class="fw-bold mb-3 text-uppercase tracking-wider text-start" style="font-size: 0.9rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;">Navigation</h5>
+                    <div class="row g-2" style="font-size: 0.95rem;">
+                        <div class="col-6 d-flex flex-column gap-2 text-start">
+                            <a href="#hero" class="text-decoration-none text-reset fw-bold opacity-75 hover-opacity-100"><i class="bi bi-chevron-right me-1.5 text-primary"></i>Back to Top</a>
+                            <a href="#about" class="text-decoration-none text-reset fw-bold opacity-75 hover-opacity-100"><i class="bi bi-chevron-right me-1.5 text-primary"></i>My Journey</a>
+                        </div>
+                        <div class="col-6 d-flex flex-column gap-2 text-start">
+                            <a href="#skills" class="text-decoration-none text-reset fw-bold opacity-75 hover-opacity-100"><i class="bi bi-chevron-right me-1.5 text-primary"></i>About Me</a>
+                            <a href="#projects" class="text-decoration-none text-reset fw-bold opacity-75 hover-opacity-100"><i class="bi bi-chevron-right me-1.5 text-primary"></i>Featured Projects</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="row pt-4 border-top border-2 align-items-center justify-content-between g-3" style="border-color: var(--border-color) !important; font-size: 0.9rem;">
+                <div class="col-md-8 text-start">
+                    <p class="opacity-75 mb-0">&copy; 2026 Phyrurizqi Altiano Firdauzan. All rights reserved.</p>
+                </div>
+                <div class="col-md-4 text-md-end text-start">
+                    <!-- Console Prompt badge -->
+                    <span class="btn-brutal btn-brutal-secondary py-1 px-3 fs-6" style="border-radius: 8px; cursor: pointer; background-color: var(--accent-color); color: var(--accent-text) !important; border-color: var(--border-color);" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                        <i class="bi bi-terminal me-2"></i>&gt;_
+                    </span>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <!-- BOOTSTRAP 5 MODAL UNTUK DETAIL PROJEK[cite: 5] -->
-    <div class="modal fade" id="projectDetailModal" tabindex="-1" aria-hidden="true">[cite: 5]
-      <div class="modal-dialog modal-dialog-centered modal-lg">[cite: 5]
-        <div class="modal-content flat-modal-content p-4">[cite: 5]
-          
-          <div class="d-flex justify-content-end mb-2">[cite: 5]
-            <button type="button" class="btn-close-flat" data-bs-dismiss="modal" aria-label="Close">X</button>[cite: 5]
-          </div>[cite: 5]
-
-          <div class="modal-body p-0">[cite: 5]
-            <div class="mb-3">[cite: 5]
-              <span class="badge bg-light text-dark border mb-2" id="modal-project-tag">Website</span>[cite: 5]
-              <h2 class="fw-bold text-uppercase m-0" id="modal-project-title">Tourism Information System</h2>[cite: 5]
-            </div>[cite: 5]
-            
-            <hr class="my-3" style="border-color: #dee2e6;">[cite: 5]
-
-            <div id="modal-project-details">[cite: 5]
-                <h6><strong>CHALLENGES</strong></h6>
-                <p class="small text-secondary">Synchronizing large geo-location maps markers without decreasing application render latency.</p>
-            </div>[cite: 5]
-          </div>[cite: 5]
-
-        </div>[cite: 5]
-      </div>[cite: 5]
-    </div>[cite: 5]
+    <!-- BOOTSTRAP 5 MODAL FOR PROJECT DETAIL -->
+    <div class="modal fade" id="projectDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content flat-modal-content p-4">
+                <div class="d-flex justify-content-end mb-2">
+                    <button type="button" class="btn-close-flat" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body p-0 text-start">
+                    <div class="mb-3">
+                        <span class="badge bg-light text-dark border mb-2" id="modal-project-tag">Website & Mobile</span>
+                        <h2 class="fw-bold text-uppercase m-0" id="modal-project-title">Tourism Information System</h2>
+                    </div>
+                    
+                    <hr class="my-4" style="border-color: var(--border-color); border-width: 2px;">
+                    
+                    <div id="modal-project-details">
+                        <h5 class="fw-bold mb-2">CHALLENGES</h5>
+                        <p class="opacity-75">
+                            Synchronizing large geo-location maps markers without decreasing application render latency, handled via optimized markers clustered caching mechanisms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap 5 JS Bundle CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -330,15 +1242,57 @@
     <!-- Script Dark Mode Switcher -->
     <script>
         const toggleBtn = document.getElementById('theme-toggle');
+        
+        // Check for saved user theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            if (toggleBtn) {
+                toggleBtn.innerHTML = '<i class="bi bi-sun-fill me-2"></i>Light Mode';
+            }
+        }
+
         if (toggleBtn) {
             toggleBtn.addEventListener('click', () => {
                 document.body.classList.toggle('dark-mode');
+                
                 if (document.body.classList.contains('dark-mode')) {
-                    toggleBtn.innerText = "Light Mode";
+                    toggleBtn.innerHTML = '<i class="bi bi-sun-fill me-2"></i>Light Mode';
+                    localStorage.setItem('theme', 'dark');
                 } else {
-                    toggleBtn.innerText = "Dark Mode";
+                    toggleBtn.innerHTML = '<i class="bi bi-moon-stars-fill me-2"></i>Dark Mode';
+                    localStorage.setItem('theme', 'light');
                 }
             });
+        }
+
+        // Tab switcher script
+        function switchContactTab(tab) {
+            const emailBtn = document.getElementById('tab-email');
+            const anonBtn = document.getElementById('tab-anon');
+            const emailForm = document.getElementById('form-email-container');
+            const anonForm = document.getElementById('form-anon-container');
+            const sendViaTitle = document.getElementById('send-via-title');
+            
+            if (tab === 'email') {
+                emailBtn.classList.add('btn-brutal-primary');
+                emailBtn.classList.remove('btn-brutal-secondary');
+                anonBtn.classList.add('btn-brutal-secondary');
+                anonBtn.classList.remove('btn-brutal-primary');
+                
+                emailForm.classList.remove('d-none');
+                anonForm.classList.add('d-none');
+                sendViaTitle.innerHTML = '<i class="bi bi-envelope-fill me-2" style="color: var(--accent-color);"></i>SEND VIA EMAIL';
+            } else {
+                anonBtn.classList.add('btn-brutal-primary');
+                anonBtn.classList.remove('btn-brutal-secondary');
+                emailBtn.classList.add('btn-brutal-secondary');
+                emailBtn.classList.remove('btn-brutal-primary');
+                
+                emailForm.classList.add('d-none');
+                anonForm.classList.remove('d-none');
+                sendViaTitle.innerHTML = '<i class="bi bi-incognito me-2" style="color: var(--accent-color);"></i>SEND ANONYMOUSLY';
+            }
         }
     </script>
 </body>
